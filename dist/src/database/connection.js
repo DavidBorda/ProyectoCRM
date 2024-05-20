@@ -14,6 +14,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dbConnection = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
+/**
+ * @api {function} dbConnection() Conexión a la Base de Datos
+ * @apiName dbConnection
+ * @apiGroup Base de Datos
+ *
+ * @apiDescription Establece la conexión a la base de datos utilizando la URL de conexión proporcionada en la variable de entorno `DB_CONNECTION`.
+ *
+ * @apiSuccess {String} message Mensaje de éxito que indica que la base de datos está en línea.
+ *
+ * @apiSuccessExample {String} Mensaje de éxito:
+ *     DB Online
+ *
+ * @apiError {String} message Mensaje de error que indica que hubo un problema al conectar a la base de datos.
+ *
+ * @apiErrorExample {String} Mensaje de error:
+ *     Error en la conexion de la base de datos
+ */
 const dbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const dbUrl = process.env.DB_CONNECTION;

@@ -4,9 +4,10 @@
 //Generar el token
 //Login exitoso
 import bcrypt from 'bcryptjs';
-import { Request, Response } from "express";
+import { Request, Response, response } from "express";
 import UsuarioModel from "../models/usuario.model";
 import generateJWT from '../helpers/jwt';
+import { CustomRequest } from '../middlewares/validate-jwt';
 /**
  * @api {post} /login Iniciar sesión
  * @apiName IniciarSesion
@@ -81,5 +82,80 @@ export const login = async(req: Request, res: Response)=>{
             msg: "contactese con el administrador",
         });
         
+    }
+}
+// para recuperar se necesitan dos valores el email y el documento
+export const olvidoContrasena  = async (req: Request, res: Response)=> {
+    const {email, numeroDocumento} = req.body;
+    try {
+        const existeUsuario = await UsuarioModel.findOne({
+            email, 
+            numeroDocumento,        
+        });
+        if(!existeUsuario){
+            res.status(400).json({
+                ok:false,
+                msg: "Los datos no coinciden",   
+            });
+        }
+        const id = existeUsuario?._id;
+        if(id){
+            //Generar token
+            const token = await generateJWT(
+                id,
+                email,
+                "1h", 
+                process.env.JWT_SECRET_PASS
+            );
+            res.status(300).json({
+                ok:true,
+                msg: "Proceso Exitoso",
+                usuario: existeUsuario,
+                token
+            });
+        }
+        
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({
+            ok: false,
+            msg: "No se logro validar los datos",
+        });
+        
+    }
+};
+export const cambioContrasena = async (req: CustomRequest, res: Response)=>{
+    const id  = req._id
+    const{password} = req.body;
+    try {
+        if(!password){
+            res.status(400).json({
+                ok:false,
+                msg: "Por favir digite una contraseña valida",
+            });
+        }
+        const newPassword = bcrypt.hashSync(password, 10);
+        const actualizarPassword = await UsuarioModel.findByIdAndUpdate({
+            _id : id,
+            password: newPassword,
+        });
+        if(!actualizarPassword){
+            res.status(400).json({
+                ok: false,
+                msg: "Error al actualizar la contraseña",
+            });
+        }
+        res.status(200).json({
+            ok:true,
+            msg: "Contraseña Actualizada",
+        })
+        
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({
+            ok:false,
+            msg: "Erroa al actualizar la contraseña, contacte un administrador",
+        });
+
     }
 }

@@ -202,7 +202,7 @@ check("numeroDocumento", "El numero de documento es obligatorio").not().isEmpty(
 check("email", "El correo electronico es obligatorio").not().isEmpty().isEmail(),
 validateFields],crearUsuario);
 router.get("/", validateJWT, getUsuario);
-router.get("/:id", getUnUsuario);
-router.put("/:id", actualizarUsuario);
-router.delete("/:id", eliminarUsuario);
+router.get("/:id", validateJWT, getUnUsuario);
+router.put("/:id", validateJWT, actualizarUsuario);
+router.delete("/:id", validateJWT, eliminarUsuario);
 export default router;

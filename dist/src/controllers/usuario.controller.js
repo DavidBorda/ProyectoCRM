@@ -15,6 +15,42 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarUsuario = exports.actualizarUsuario = exports.getUnUsuario = exports.getUsuario = exports.crearUsuario = void 0;
 const usuario_model_1 = __importDefault(require("../models/usuario.model"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
+/**
+ * @api {post} /usuarios Crear Usuario
+ * @apiName CrearUsuario
+ * @apiGroup Usuarios
+ *
+ * @apiDescription Crea un nuevo usuario en el sistema.
+ *
+ * @apiParam {Object} body Objeto que contiene los datos del usuario.
+ * @apiParam {String} body.email Email del usuario.
+ * @apiParam {String} body.password Contraseña del usuario.
+ *
+ * @apiSuccess {Boolean} ok Indica si la solicitud fue exitosa.
+ * @apiSuccess {String} msg Mensaje de éxito.
+ * @apiSuccess {Object} usuario Objeto que representa al usuario creado.
+ *
+ * @apiSuccessExample {json} Respuesta exitosa:
+ *     HTTP/1.1 200 OK
+ *     {
+ *         "ok": true,
+ *         "msg": "Usuario creado exitosamente",
+ *         "usuario": {
+ *             "_id": "6128c7a378a4b525e4e56d28",
+ *             "email": "usuario@example.com"
+ *         }
+ *     }
+ *
+ * @apiError {Boolean} ok Indica si la solicitud fue exitosa.
+ * @apiError {String} msg Mensaje de error.
+ *
+ * @apiErrorExample {json} Respuesta de error:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *         "ok": false,
+ *         "msg": "Error al crear el usuario, comuniquese con el administrador"
+ *     }
+ */
 const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     const { email, password } = body;
