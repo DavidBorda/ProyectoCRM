@@ -20,6 +20,7 @@ exports.cambioContrasena = exports.olvidoContrasena = exports.login = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const usuario_model_1 = __importDefault(require("../models/usuario.model"));
 const jwt_1 = __importDefault(require("../helpers/jwt"));
+const email_1 = __importDefault(require("../helpers/email"));
 /**
  * @api {post} /login Iniciar sesión
  * @apiName IniciarSesion
@@ -111,11 +112,14 @@ const olvidoContrasena = (req, res) => __awaiter(void 0, void 0, void 0, functio
         if (id) {
             //Generar token
             const token = yield (0, jwt_1.default)(id, email, "1h", process.env.JWT_SECRET_PASS);
+            //Guardar token
+            existeUsuario.token = token;
+            yield existeUsuario.save();
+            (0, email_1.default)("davidborda592@gmail.com", "asunto", `texto correo ${token}`);
             res.status(300).json({
                 ok: true,
                 msg: "Proceso Exitoso",
                 usuario: existeUsuario,
-                token
             });
         }
     }
@@ -131,34 +135,43 @@ exports.olvidoContrasena = olvidoContrasena;
 const cambioContrasena = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req._id;
     const { password } = req.body;
+    const tokenPass = req.header("x-token-pass");
     try {
-        if (!password) {
-            res.status(400).json({
+        if (!password || !tokenPass) {
+            return res.status(400).json({
                 ok: false,
-                msg: "Por favir digite una contraseña valida",
+                msg: "Valores invalidos",
+            });
+        }
+        const usuario = yield usuario_model_1.default.findOne({ token: tokenPass });
+        if (!usuario) {
+            return res.status(400).json({
+                ok: false,
+                msg: "El token ya fue utilizado",
             });
         }
         const newPassword = bcryptjs_1.default.hashSync(password, 10);
-        const actualizarPassword = yield usuario_model_1.default.findByIdAndUpdate({
-            _id: id,
+        const actualizarPassword = yield usuario_model_1.default.findByIdAndUpdate(id, {
             password: newPassword,
-        });
+            token: "",
+        }, { new: true });
+        console.log("actualizarPassword", actualizarPassword);
         if (!actualizarPassword) {
-            res.status(400).json({
+            return res.status(400).json({
                 ok: false,
                 msg: "Error al actualizar la contraseña",
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             ok: true,
             msg: "Contraseña Actualizada",
         });
     }
     catch (error) {
         console.error(error);
-        res.status(400).json({
+        return res.status(400).json({
             ok: false,
-            msg: "Erroa al actualizar la contraseña, contacte un administrador",
+            msg: "Error al actualizar la contraseña, contacte un administrador",
         });
     }
 });

@@ -60,7 +60,7 @@ router.post("/olvidocontrasena", [
     (0, express_validator_1.check)("numeroDocumento", "El password es obligatorio").not().isEmpty(),
     validate_fields_1.validateFields,
 ], auth_controller_1.olvidoContrasena);
-router.put("/cambiocontrasena", validate_jwt_1.validateJWT, [
+router.put("/cambiocontrasena", validate_jwt_1.validateJWTPass, [
     (0, express_validator_1.check)("password", "El password es obligatorio").not().isEmpty(),
 ], auth_controller_1.cambioContrasena);
 exports.default = router;

@@ -49,6 +49,10 @@ const UsuarioSchema = new Schema({
     },
     password: { type: String },
     rol: { type: String, default: "User" },
+    
+    token: {type: String, require: false},
+
+
     createAt: {
         type: Date,
         default: Date.now(),

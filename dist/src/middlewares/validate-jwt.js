@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateJWT = void 0;
+exports.validateJWTPass = exports.validateJWT = void 0;
 /**
  * @api {function} validateJWT() Validar Token JWT
  * @apiName validateJWT
@@ -45,4 +45,25 @@ const validateJWT = (req, res, next) => {
     }
 };
 exports.validateJWT = validateJWT;
+const validateJWTPass = (req, res, next) => {
+    const token = req.header("x-token-pass");
+    if (!token) {
+        return res.status(401).json({
+            ok: false,
+            msg: "No hay token en la petición",
+        });
+    }
+    try {
+        const { _id } = jwt.verify(token, process.env.JWT_SECRET_PASS);
+        req._id = _id;
+        next();
+    }
+    catch (error) {
+        return res.status(401).json({
+            ok: false,
+            msg: "Token invalido",
+        });
+    }
+};
+exports.validateJWTPass = validateJWTPass;
 //# sourceMappingURL=validate-jwt.js.map
