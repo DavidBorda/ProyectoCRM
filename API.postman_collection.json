@@ -1,0 +1,432 @@
+{
+	"info": {
+		"_postman_id": "d1b56573-4f76-4992-946b-19071d8ae2aa",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34867183"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "CreaUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Laura Vargas fige\",\r\n    \"email\": \"correo5@gmail.com\",\r\n    \"tipoDocumento\": \"Cedula de ciudadania\",\r\n    \"numeroDocumento\": 10454,\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/v1/usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizarUsuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"David Alexander Leon\",\r\n    \"email\": \"correo2@hotmail.com\",\r\n    \"tipoDocumento\": \"Cedula de ciudadania\",\r\n    \"numeroDocumento\": 1012\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/v1/usuario/66415e73ccf6ba2d5daa131d",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"usuario",
+								"66415e73ccf6ba2d5daa131d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUsuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQxYWY0ZjM2OWEzMzEyZDdjODJhMzQiLCJlbWFpbCI6ImNvcnJlbzVAZ21haWwuY29tIiwiaWF0IjoxNzE2MTc0ODM3LCJleHAiOjE3MTYyMTgwMzd9.X_8HeX2DPkM4E1gKN9E3_b1omkipPw50iSD0597m8sQ"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"David Borda\",\r\n    \"email\": \"correo1@gmail.com\",\r\n    \"tipoDocumento\": \"Cedula de ciudadania\",\r\n    \"numeroDocumento\": 1010\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/v1/usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUnUsuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"David Borda\",\r\n    \"email\": \"correo1@gmail.com\",\r\n    \"tipoDocumento\": \"Cedula de ciudadania\",\r\n    \"numeroDocumento\": 1010\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/v1/usuario/66415efbf8d16bbc958befd0",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"usuario",
+								"66415efbf8d16bbc958befd0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminarUsuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"David Borda\",\r\n    \"email\": \"correo1@gmail.com\",\r\n    \"tipoDocumento\": \"Cedula de ciudadania\",\r\n    \"numeroDocumento\": 1010\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/v1/usuario/66415efbf8d16bbc958befd0",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"usuario",
+								"66415efbf8d16bbc958befd0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "CreaProducto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numeroLote\": \"Lote004\",\r\n    \"nombreProducto\": \"Computador AlienWare\",\r\n    \"Precio\": 3000000,\r\n    \"CantidadDisponible\": 85\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/v1/producto",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"producto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProducto",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numeroLote\": \"Lote004\",\r\n    \"nombreProducto\": \"Computador AlienWare\",\r\n    \"Precio\": 3000000,\r\n    \"CantidadDisponible\": 85\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/v1/producto/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"producto",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUnProducto",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"David Borda\",\r\n    \"email\": \"correo1@gmail.com\",\r\n    \"tipoDocumento\": \"Cedula de ciudadania\",\r\n    \"numeroDocumento\": 1010\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/v1/producto/66419d9e5f4151d78db0ec66",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"producto",
+								"66419d9e5f4151d78db0ec66"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminarProducto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numeroLote\": \"Lote001\",\r\n    \"nombreProducto\": \"Computador Rog\",\r\n    \"Precio\": 3000000,\r\n    \"CantidadDisponible\": 87\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/v1/producto/66419d9e5f4151d78db0ec66",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"producto",
+								"66419d9e5f4151d78db0ec66"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizarProducto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numeroLote\": \"Lote001\",\r\n    \"nombreProducto\": \"Computador Rog\",\r\n    \"Precio\": 3000000,\r\n    \"CantidadDisponible\": 87\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/v1/producto/66419d9e5f4151d78db0ec66",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"producto",
+								"66419d9e5f4151d78db0ec66"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"correo3@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/v1/login",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Olvidar Contraseña",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"correo3@gmail.com\",\r\n    \"numeroDocumento\": \"1022\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/v1/login/olvidocontrasena",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"login",
+						"olvidocontrasena"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cambio Contraseña",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token-pass",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQxYTYyZDExN2M1ZGNmMjE1ODY5OWEiLCJlbWFpbCI6ImNvcnJlbzNAZ21haWwuY29tIiwiaWF0IjoxNzE2NTE2MzYxLCJleHAiOjE3MTY1MTk5NjF9.CgFK_f4xlV9XnvKhebxurse3S3hxTzIDDI8qjgTxFN8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"contraseñaNueva3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/v1/login/cambiocontrasena",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"login",
+						"cambiocontrasena"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

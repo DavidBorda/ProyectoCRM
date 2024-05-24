@@ -1,0 +1,26 @@
+{
+  "type": "Compass Connections",
+  "version": {
+    "$numberInt": "1"
+  },
+  "connections": [
+    {
+      "id": "b2f45c58-20f5-4160-8e4b-e66930383b30",
+      "lastUsed": {
+        "$date": {
+          "$numberLong": "1716521132462"
+        }
+      },
+      "favorite": {
+        "name": "Base de datos (API)"
+      },
+      "savedConnectionType": "favorite",
+      "connectionOptions": {
+        "connectionString": "mongodb+srv://davidborda592:h1QChq6ULrlbtC5l@cluster0.kpujnvz.mongodb.net/",
+        "oidc": {
+          "serializedState": "eyJvaWRjUGx1Z2luU3RhdGVWZXJzaW9uIjowLCJzdGF0ZSI6W119"
+        }
+      }
+    }
+  ]
+}
