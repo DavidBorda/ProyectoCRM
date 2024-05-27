@@ -78,7 +78,7 @@
 						"header": [
 							{
 								"key": "x-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQxYWY0ZjM2OWEzMzEyZDdjODJhMzQiLCJlbWFpbCI6ImNvcnJlbzVAZ21haWwuY29tIiwiaWF0IjoxNzE1NjY3MjQyLCJleHAiOjE3MTU3MTA0NDJ9.cXEXam9ITnetehTzC-KbvPylybJbLOZXpsIUwBYJwsY"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQxYWY0ZjM2OWEzMzEyZDdjODJhMzQiLCJlbWFpbCI6ImNvcnJlbzVAZ21haWwuY29tIiwiaWF0IjoxNzE2MTc0ODM3LCJleHAiOjE3MTYyMTgwMzd9.X_8HeX2DPkM4E1gKN9E3_b1omkipPw50iSD0597m8sQ"
 							}
 						],
 						"body": {
@@ -335,13 +335,13 @@
 			"item": []
 		},
 		{
-			"name": "Token",
+			"name": "Login",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"correo5@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"raw": "{\r\n    \"email\": \"correo3@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -358,6 +358,71 @@
 						"api",
 						"v1",
 						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Olvidar Contraseña",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"correo3@gmail.com\",\r\n    \"numeroDocumento\": \"1022\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/v1/login/olvidocontrasena",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"login",
+						"olvidocontrasena"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cambio Contraseña",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token-pass",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQxYTYyZDExN2M1ZGNmMjE1ODY5OWEiLCJlbWFpbCI6ImNvcnJlbzNAZ21haWwuY29tIiwiaWF0IjoxNzE2NTE2MzYxLCJleHAiOjE3MTY1MTk5NjF9.CgFK_f4xlV9XnvKhebxurse3S3hxTzIDDI8qjgTxFN8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"contraseñaNueva3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/v1/login/cambiocontrasena",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"login",
+						"cambiocontrasena"
 					]
 				}
 			},
