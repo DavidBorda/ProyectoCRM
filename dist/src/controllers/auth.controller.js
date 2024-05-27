@@ -21,6 +21,8 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const usuario_model_1 = __importDefault(require("../models/usuario.model"));
 const jwt_1 = __importDefault(require("../helpers/jwt"));
 const email_1 = __importDefault(require("../helpers/email"));
+const path_1 = __importDefault(require("path"));
+const fs_1 = __importDefault(require("fs"));
 /**
  * @api {post} /login Iniciar sesión
  * @apiName IniciarSesion
@@ -115,7 +117,11 @@ const olvidoContrasena = (req, res) => __awaiter(void 0, void 0, void 0, functio
             //Guardar token
             existeUsuario.token = token;
             yield existeUsuario.save();
-            (0, email_1.default)("davidborda592@gmail.com", "asunto", `texto correo ${token}`);
+            const nombre = existeUsuario.nombre;
+            const templatePath = path_1.default.join(__dirname, "../templates/olvidoContrasena.html");
+            const emailTemplate = fs_1.default.readFileSync(templatePath, "utf8");
+            const personalizarEmail = emailTemplate.replace("{{name}}", nombre).replace("{{token}}", existeUsuario.token);
+            (0, email_1.default)("davidborda592@gmail.com", "Cambio Contraseña", personalizarEmail);
             res.status(300).json({
                 ok: true,
                 msg: "Proceso Exitoso",

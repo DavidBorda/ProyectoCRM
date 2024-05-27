@@ -5,12 +5,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.transporter = void 0;
 const nodemailer_1 = __importDefault(require("nodemailer"));
+const config_1 = require("./config");
+const environment = config_1.config[process.env.NODE_ENV || "desarrollo"];
+const { host, port, email, password } = environment.email;
 exports.transporter = nodemailer_1.default.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
+    service: "hotmail",
+    host: host,
+    port,
+    secure: false,
     auth: {
-        user: 'danny21@ethereal.email',
-        pass: 'FggEYUUNVfXM7P2GXg'
+        user: email,
+        pass: password,
+    },
+    tls: {
+        ciphers: "SSLv3",
+        rejectUnauthorized: false,
     }
 });
 exports.transporter.verify().then(() => {

@@ -9,6 +9,8 @@ import UsuarioModel from "../models/usuario.model";
 import generateJWT from '../helpers/jwt';
 import { CustomRequest } from '../middlewares/validate-jwt';
 import sendEmail from '../helpers/email';
+import path from "path";
+import fs from "fs";
 /**
  * @api {post} /login Iniciar sesión
  * @apiName IniciarSesion
@@ -112,9 +114,19 @@ export const olvidoContrasena  = async (req: Request, res: Response)=> {
                existeUsuario.token = token;
                await existeUsuario.save(); 
 
+               const nombre = existeUsuario.nombre;
+
+               const templatePath = path.join(
+                __dirname,
+                "../templates/olvidoContrasena.html"
+               );
+               const emailTemplate = fs.readFileSync(templatePath, "utf8")
+
+               const personalizarEmail = emailTemplate.replace("{{name}}", nombre).replace("{{token}}", existeUsuario.token);
+
             sendEmail("davidborda592@gmail.com",
-            "asunto", 
-            `texto correo ${token}` );
+            "Cambio Contraseña", 
+             personalizarEmail );
 
 
             res.status(300).json({

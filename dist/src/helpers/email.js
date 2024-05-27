@@ -1,9 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const config_1 = require("../config/config");
 const mailer_1 = require("../config/mailer");
+const environment = config_1.config[process.env.NODE_ENV || "desarrollo"];
+const { email, from } = environment.email;
 const sendEmail = (to, subject, html) => {
     mailer_1.transporter.sendMail({
-        from: '"Danny Funk" <danny21@ethereal.email>',
+        from: `${from} < ${email}>`,
         to,
         subject,
         html,
@@ -13,7 +16,7 @@ const sendEmail = (to, subject, html) => {
         }
         else {
             console.log("correo enviado");
-            console.log(info);
+            console.info(info.envelope);
         }
     });
 };
