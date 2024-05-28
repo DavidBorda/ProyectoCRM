@@ -1,4 +1,4 @@
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, Types, model } from "mongoose";
 
 /**
  * @api {object} ProductoModel Modelo de Producto
@@ -14,8 +14,32 @@ import { Model, Schema, model } from "mongoose";
  * @apiParam {Date} [fechaIngreso=Date.now()] Fecha de ingreso del producto (valor por defecto: fecha actual).
  */
 
+interface Distribuidor {
+    nit : string;
+    razonSociak: string;
+    telefono: number;
+    direccion : string;
+}
+ 
+interface Opiniones{
+    comentarios: string;
+    calificacion: number;
+    fecha?: Date;
+}
+interface ProductoInterface{
+    numeroLote: string;
+    nombreProducto: string;
+    Precio: number;
+    CantidadDisponible: number;
+    distribuidor: Distribuidor;
+    opiniones: Opiniones;
+    usuario: Types.ObjectId;
+    fechaIngreso: Date;
+}
 
-const ProductoSchema = new Schema({
+
+
+const ProductoSchema = new Schema<ProductoInterface>({
     numeroLote: {
         type: String,
         required: true,
@@ -28,15 +52,18 @@ const ProductoSchema = new Schema({
         type: Number,
         required: true,
     },
+    distribuidor: {type: Object, require: true},
+    opiniones: {type: Object},
     CantidadDisponible: {
         type: Number,
         required: true,
     },
+    usuario: {type: Schema.Types.ObjectId, ref: "usuario", require: true},
     fechaIngreso: {
         type: Date,
         default: Date.now(),
     },
 
 });
-const ProductoModel: Model<any> = model("productos", ProductoSchema);
+const ProductoModel: Model<ProductoInterface> = model<ProductoInterface>("productos", ProductoSchema);
 export default ProductoModel;

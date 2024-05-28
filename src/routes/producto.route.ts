@@ -2,6 +2,7 @@ import { Router } from "express";
 import { actualizarProducto, crearProducto, eliminarProducto, getProductos, getUnProducto } from "../controllers/producto.controller";
 import { check } from "express-validator";
 import { validateFields } from "../middlewares/validate-fields";
+import { validateJWT } from "../middlewares/validate-jwt";
 
 /**
  * @api {post} /api/v1/producto Crear Producto
@@ -190,7 +191,10 @@ import { validateFields } from "../middlewares/validate-fields";
 
 //path  /api/v1/producto
 const router = Router();
-router.post("/", [check("numeroLote", "El numero de lote es obligatorio").not().isEmpty(),
+router.post("/", 
+validateJWT,
+
+[check("numeroLote", "El numero de lote es obligatorio").not().isEmpty(),
 check("nombreProducto", "El nombre del producto es obligatorio").not().isEmpty(),
 check("Precio", "El precio del producto es obligatorio").not().isEmpty(),
 check("CantidadDisponible", "La Cantidad del producto es obligatorio").not().isEmpty(),

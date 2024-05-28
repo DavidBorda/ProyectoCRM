@@ -4,6 +4,7 @@ const express_1 = require("express");
 const producto_controller_1 = require("../controllers/producto.controller");
 const express_validator_1 = require("express-validator");
 const validate_fields_1 = require("../middlewares/validate-fields");
+const validate_jwt_1 = require("../middlewares/validate-jwt");
 /**
  * @api {post} /api/v1/producto Crear Producto
  * @apiName CrearProducto
@@ -185,7 +186,7 @@ const validate_fields_1 = require("../middlewares/validate-fields");
  */
 //path  /api/v1/producto
 const router = (0, express_1.Router)();
-router.post("/", [(0, express_validator_1.check)("numeroLote", "El numero de lote es obligatorio").not().isEmpty(),
+router.post("/", validate_jwt_1.validateJWT, [(0, express_validator_1.check)("numeroLote", "El numero de lote es obligatorio").not().isEmpty(),
     (0, express_validator_1.check)("nombreProducto", "El nombre del producto es obligatorio").not().isEmpty(),
     (0, express_validator_1.check)("Precio", "El precio del producto es obligatorio").not().isEmpty(),
     (0, express_validator_1.check)("CantidadDisponible", "La Cantidad del producto es obligatorio").not().isEmpty(),

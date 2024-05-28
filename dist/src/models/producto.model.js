@@ -1,19 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
-/**
- * @api {object} ProductoModel Modelo de Producto
- * @apiName ProductoModel
- * @apiGroup Modelos
- *
- * @apiDescription Modelo de Mongoose para representar un producto en el inventario.
- *
- * @apiParam {String} numeroLote Número de lote del producto.
- * @apiParam {String} nombreProducto Nombre del producto.
- * @apiParam {Number} Precio Precio del producto.
- * @apiParam {Number} CantidadDisponible Cantidad disponible del producto.
- * @apiParam {Date} [fechaIngreso=Date.now()] Fecha de ingreso del producto (valor por defecto: fecha actual).
- */
 const ProductoSchema = new mongoose_1.Schema({
     numeroLote: {
         type: String,
@@ -27,10 +14,13 @@ const ProductoSchema = new mongoose_1.Schema({
         type: Number,
         required: true,
     },
+    distribuidor: { type: Object, require: true },
+    opiniones: { type: Object },
     CantidadDisponible: {
         type: Number,
         required: true,
     },
+    usuario: { type: mongoose_1.Schema.Types.ObjectId, ref: "usuario", require: true },
     fechaIngreso: {
         type: Date,
         default: Date.now(),
