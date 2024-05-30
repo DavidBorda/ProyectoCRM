@@ -9,6 +9,7 @@ const cors_1 = __importDefault(require("cors"));
 const usuario_route_1 = __importDefault(require("./routes/usuario.route"));
 const producto_route_1 = __importDefault(require("./routes/producto.route"));
 const auth_route_1 = __importDefault(require("./routes/auth.route"));
+const interaction_route_1 = __importDefault(require("./routes/interaction.route"));
 /**
  * Clase que representa el servidor de la aplicación.
  * @class
@@ -24,6 +25,7 @@ class Server {
             usuario: "/api/v1/usuario",
             producto: "/api/v1/producto",
             login: "/api/v1/login",
+            interaction: "/api/v1/interaction",
         };
         this.app = (0, express_1.default)();
         // Define el puerto del servidor
@@ -62,6 +64,7 @@ class Server {
         this.app.use(this.apiPaths.producto, producto_route_1.default);
         // Asocia las rutas de autenticación a la ruta /api/v1/login
         this.app.use(this.apiPaths.login, auth_route_1.default);
+        this.app.use(this.apiPaths.interaction, interaction_route_1.default);
     }
     /**
        * Inicia el servidor y lo hace escuchar en el puerto especificado.

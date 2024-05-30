@@ -81,7 +81,10 @@ const crearProducto = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.crearProducto = crearProducto;
 const getProductos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const productos = yield producto_model_1.default.find();
+        const productos = yield producto_model_1.default.find().populate({
+            path: "usuario",
+            select: "nombre email numeroCelular"
+        });
         res.json({
             ok: true,
             productos,

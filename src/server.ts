@@ -4,6 +4,7 @@ import cors from "cors";
 import usuarioRoutes from "./routes/usuario.route";
 import productoRoutes from "./routes/producto.route";
 import authRoutes from "./routes/auth.route";
+import interactionRoute from "./routes/interaction.route";
 /**
  * Clase que representa el servidor de la aplicación.
  * @class
@@ -15,6 +16,7 @@ class Server {
         usuario: "/api/v1/usuario",
         producto: "/api/v1/producto",
         login: "/api/v1/login",
+        interaction: "/api/v1/interaction",
     };
      /**
      * Crea una instancia del servidor.
@@ -63,6 +65,7 @@ routes(): void{
     this.app.use(this.apiPaths.producto, productoRoutes);
            // Asocia las rutas de autenticación a la ruta /api/v1/login
     this.app.use(this.apiPaths.login, authRoutes);
+    this.app.use(this.apiPaths.interaction, interactionRoute);
 }
   /**
      * Inicia el servidor y lo hace escuchar en el puerto especificado.
