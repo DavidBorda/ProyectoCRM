@@ -46,100 +46,96 @@ import { CustomRequest } from "../middlewares/validate-jwt";
  *     }
  */
 
-export const crearProducto = async(req: CustomRequest, res: Response)=>{
-    const {body} = req;
+export const crearProducto = async (req: CustomRequest, res: Response) => {
+  const { body } = req;
 
-    const id = req._id;
+  const id = req._id;
 
-    try {
-        const newProducto = new ProductoModel({usuario: id, ...body, });
-        const productoCreado = await newProducto.save();
-        res.status(200).json({
-            ok:true,
-            msg:"Producto creado exitosamente",
-            producto: productoCreado,
-        })        
-    } catch (error) {
-        console.error(error);
-        res.status(400).json({
-            ok:false,
-            error,
-            msg: "Error al crear el producto, comuniquese con el administrador",
-        });
-        
-    }
+  try {
+    const newProducto = new ProductoModel({ usuario: id, ...body });
+    const productoCreado = await newProducto.save();
+    res.status(200).json({
+      ok: true,
+      msg: "Producto creado exitosamente",
+      producto: productoCreado,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      ok: false,
+      error,
+      msg: "Error al crear el producto, comuniquese con el administrador",
+    });
+  }
 };
-export const getProductos = async(req: Request, res: Response)=>{
-    try {
-        const productos = await ProductoModel.find().populate({
-            path: "usuario",
-            select: "nombre email numeroCelular"
-        });
-        res.json({
-            ok:true,
-            productos,
-        })
-    } catch (error) {
-        res.status(400).json({
-            ok: false,
-            msg: "Error al consultar los usuarios",
-        })
-        
-    }
+export const getProductos = async (req: Request, res: Response) => {
+  try {
+    const productos = await ProductoModel.find().populate({
+      path: "usuario",
+      select: "nombre email",
+    });
+    res.json({
+      ok: true,
+      productos,
+    });
+  } catch (error) {
+    res.status(400).json({
+      ok: false,
+      msg: "Error al consultar los productos",
+    });
+  }
 };
 
-export const getUnProducto = async(req: Request, res: Response)=>{
-    try {
-        const id = req.params.id;
-        const producto = await ProductoModel.findById({_id: id});
-        res.json({
-            ok:true,
-             producto,
-        });
-    } catch (error) {
-        res.status(400).json({
-            ok: false,
-            msg: "Error al consultar los productos",
-        });
-        
-    }
+export const getUnProducto = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const producto = await ProductoModel.findById({ _id: id });
+    res.json({
+      ok: true,
+      producto,
+    });
+  } catch (error) {
+    res.status(400).json({
+      ok: false,
+      msg: "Error al consultar los productos",
+    });
+  }
 };
-export const actualizarProducto = async(req: Request, res: Response)=>{
-    try {
-        const id = req.params.id;
-        const {body} = req;
-        const productoActualizado = await ProductoModel.findByIdAndUpdate(id, body);
-        res.json({
-            ok:true,
-            productoActualizado,
-            msg: "Producto Actualizado",
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(400).json({
-            ok: false,
-            msg: "Error al actualizar el producto",
-        });
-        
-    }
+export const actualizarProducto = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const { body } = req;
+    const productoActualizado = await ProductoModel.findByIdAndUpdate(id, body);
+    res.json({
+      ok: true,
+      productoActualizado,
+      msg: "Producto Actualizado",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      ok: false,
+      msg: "Error al actualizar el producto",
+    });
+  }
 };
 
-export const eliminarProducto = async(req: Request, res: Response)=>{
-    try {
-        const id = req.params.id;
-        const productoEliminado = await ProductoModel.findByIdAndDelete({_id: id});
-        res.json({
-            ok:true,
-            msg: "Producto Eliminado",
-            producto: productoEliminado,
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(400).json({
-            ok: false,
-            msg: "Error al eliminar el producto",
-        });
-        
-    }
+export const eliminarProducto = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const productoEliminado = await ProductoModel.findByIdAndDelete({
+      _id: id,
+    });
+    res.json({
+      ok: true,
+      msg: "Producto Eliminado",
+      producto: productoEliminado,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      ok: false,
+      msg: "Error al eliminar el producto",
+    });
+  }
 };
-

@@ -83,7 +83,7 @@ const getProductos = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const productos = yield producto_model_1.default.find().populate({
             path: "usuario",
-            select: "nombre email numeroCelular"
+            select: "nombre email",
         });
         res.json({
             ok: true,
@@ -93,7 +93,7 @@ const getProductos = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     catch (error) {
         res.status(400).json({
             ok: false,
-            msg: "Error al consultar los usuarios",
+            msg: "Error al consultar los productos",
         });
     }
 });
@@ -138,7 +138,9 @@ exports.actualizarProducto = actualizarProducto;
 const eliminarProducto = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-        const productoEliminado = yield producto_model_1.default.findByIdAndDelete({ _id: id });
+        const productoEliminado = yield producto_model_1.default.findByIdAndDelete({
+            _id: id,
+        });
         res.json({
             ok: true,
             msg: "Producto Eliminado",
