@@ -1,6 +1,12 @@
-import { validateJWT } from './../middlewares/validate-jwt';
+import { validateJWT } from "./../middlewares/validate-jwt";
 import { Router } from "express";
-import { actualizarUsuario, crearUsuario, eliminarUsuario, getUnUsuario, getUsuario } from "../controllers/usuario.controller";
+import {
+  actualizarUsuario,
+  crearUsuario,
+  eliminarUsuario,
+  getUnUsuario,
+  getUsuario,
+} from "../controllers/usuario.controller";
 import { check } from "express-validator";
 import { validateFields } from "../middlewares/validate-fields";
 
@@ -193,15 +199,24 @@ import { validateFields } from "../middlewares/validate-fields";
  *     }
  */
 
-
 //path  /api/v1/usuario
 const router = Router();
-router.post("/", [
-check("nombre", "El nombre es obligatorio").not().isEmpty(),
-check("numeroDocumento", "El numero de documento es obligatorio").not().isEmpty(), 
-check("email", "El correo electronico es obligatorio").not().isEmpty().isEmail(),
-validateFields],crearUsuario);
-router.get("/", validateJWT, getUsuario);
+router.post(
+  "/",
+  [
+    check("nombre", "El nombre es obligatorio").not().isEmpty(),
+    check("numeroDocumento", "El numero de documento es obligatorio")
+      .not()
+      .isEmpty(),
+    check("email", "El correo electronico es obligatorio")
+      .not()
+      .isEmpty()
+      .isEmail(),
+    validateFields,
+  ],
+  crearUsuario
+);
+router.get("/", getUsuario);
 router.get("/:id", validateJWT, getUnUsuario);
 router.put("/:id", validateJWT, actualizarUsuario);
 router.delete("/:id", validateJWT, eliminarUsuario);

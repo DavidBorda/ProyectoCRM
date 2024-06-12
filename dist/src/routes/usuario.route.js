@@ -193,11 +193,16 @@ const validate_fields_1 = require("../middlewares/validate-fields");
 const router = (0, express_1.Router)();
 router.post("/", [
     (0, express_validator_1.check)("nombre", "El nombre es obligatorio").not().isEmpty(),
-    (0, express_validator_1.check)("numeroDocumento", "El numero de documento es obligatorio").not().isEmpty(),
-    (0, express_validator_1.check)("email", "El correo electronico es obligatorio").not().isEmpty().isEmail(),
-    validate_fields_1.validateFields
+    (0, express_validator_1.check)("numeroDocumento", "El numero de documento es obligatorio")
+        .not()
+        .isEmpty(),
+    (0, express_validator_1.check)("email", "El correo electronico es obligatorio")
+        .not()
+        .isEmpty()
+        .isEmail(),
+    validate_fields_1.validateFields,
 ], usuario_controller_1.crearUsuario);
-router.get("/", validate_jwt_1.validateJWT, usuario_controller_1.getUsuario);
+router.get("/", usuario_controller_1.getUsuario);
 router.get("/:id", validate_jwt_1.validateJWT, usuario_controller_1.getUnUsuario);
 router.put("/:id", validate_jwt_1.validateJWT, usuario_controller_1.actualizarUsuario);
 router.delete("/:id", validate_jwt_1.validateJWT, usuario_controller_1.eliminarUsuario);
